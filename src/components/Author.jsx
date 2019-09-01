@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Articles from "./Articles";
 import axios from "axios";
-import { Route } from "react-router-dom";
+import Articles from "./Articles";
 const Author = ({ match: { params } }) => {
   const [Author, setAuthor] = useState({});
   useEffect(() => {
@@ -15,8 +14,7 @@ const Author = ({ match: { params } }) => {
         filter: { _id: params.id },
         populate: 3
       }
-    }).then(({ data, data: { entries } }) => {
-      console.log(data);
+    }).then(({ data, data: { entries, fields } }) => {
       if (isSubscribed) {
         setAuthor(entries[0]);
       }
@@ -39,9 +37,8 @@ const Author = ({ match: { params } }) => {
           <p>{Description}</p>
         </div>
       </div>
-      <Route component={props => <Articles AuthorFilter={_id} {...props} />} />
+      <Articles _Articles={Author.Articles} sortStatus={false} />
     </div>
   ) : null;
 };
-
 export default Author;

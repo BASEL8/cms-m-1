@@ -1,5 +1,5 @@
 import React from "react";
-import Articles from "./components/Articles.jsx";
+import Main from "./components/Main.jsx";
 import Authors from "./components/Authors.jsx";
 import Author from "./components/Author";
 import Article from "./components/Article.jsx";
@@ -32,7 +32,7 @@ const App = () => {
             </Link>
           </li>
         </ul>
-        <Route path='/' exact component={Articles} />
+        <Route path='/' exact component={Main} />
         <Route path='/authors' exact component={Authors} />
         <Route path='/newspapers' exact component={Newspapers} />
         <Route path='/articles/:id' exact component={Article} />

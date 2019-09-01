@@ -14,7 +14,6 @@ const Article = ({ match: { params } }) => {
         populate: 1
       }
     }).then(({ data, data: { entries, fields } }) => {
-      console.log(data);
       if (isSubscribed) {
         setArticle(entries[0]);
       }

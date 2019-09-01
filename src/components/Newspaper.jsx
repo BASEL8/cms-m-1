@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Articles from "./Articles";
-import { Route } from "react-router-dom";
+import Articles from "./Articles.jsx";
 const Newspaper = ({ match: { params } }) => {
   const [_Newspaper, setNewspaper] = useState({});
   useEffect(() => {
@@ -12,7 +11,8 @@ const Newspaper = ({ match: { params } }) => {
         "http://localhost:8080/api/collections/get/Newspapers?token=e9d36bfe3216e7be83d9c44dd087ff",
       headers: { "Content-Type": "application/json" },
       data: {
-        filter: { _id: params.id }
+        filter: { _id: params.id },
+        populate: 3
       }
     }).then(({ data: { entries } }) => {
       if (isSubscribed) {
@@ -30,9 +30,7 @@ const Newspaper = ({ match: { params } }) => {
           <p className='badge badge-warning mt-2 p-2 '>{Name}</p>
         </div>
       </div>
-      <Route
-        component={props => <Articles NewspaperFilter={_id} {...props} />}
-      />
+      <Articles _Articles={_Newspaper.Articles} sortStatus={false} />
     </div>
   ) : null;
 };
