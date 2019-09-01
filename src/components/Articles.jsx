@@ -1,11 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import ReactPaginate from "react-paginate";
+
 const Articles = ({
   Fields,
   setSortArticles,
   sortArticles,
   _Articles,
-  sortStatus
+  sortStatus,
+  Paginate,
+  setPaginate
 }) => {
   return (
     <div className='d-flex flex-column h-100'>
@@ -32,10 +36,28 @@ const Articles = ({
           )}
         </div>
       )}
-      <div className='pt-2 pb-2 h-100 overflow-auto'>
+      {Paginate && (
+        <ReactPaginate
+          previousLabel={"previous"}
+          nextLabel={"next"}
+          breakLabel={"...."}
+          breakClassName={"break-me"}
+          pageCount={Paginate.pageCount}
+          marginPagesDisplayed={1}
+          pageRangeDisplayed={2}
+          onPageChange={data => {
+            let selected = data.selected;
+            let skip = Math.ceil(selected * 3);
+            setPaginate({ ...Paginate, skip });
+          }}
+          containerClassName={"pagination"}
+          subContainerClassName={"pages pagination"}
+        />
+      )}
+      <div className='pb-2 h-100 overflow-auto'>
         {_Articles &&
           _Articles.map(({ Author, Date, Title, _id, Newspaper }) => (
-            <div className='border rounded col-sm-12 mt-3 p-3' key={_id}>
+            <div className='border rounded col-sm-12 mt-2 p-2' key={_id}>
               <div>
                 <span className='badge m-1 p-2 badge-secondary'>{Date}</span>
                 <Link to={`/articles/${_id}`}>

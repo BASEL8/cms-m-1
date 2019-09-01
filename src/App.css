@@ -10,3 +10,35 @@ img {
 a:hover {
   text-decoration: none
 }
+
+.pagination {
+  background-color: #f8f9fa;
+  display: flex;
+  justify-content: flex-end;
+  align-self: flex-end;
+  margin: 0
+}
+
+.pagination li {
+  padding: 10px;
+}
+
+.pagination li.selected:focus {
+  outline: navy;
+
+}
+
+.pagination li a {
+  color: #212529;
+  padding: 10px
+}
+
+.pagination li.selected a {
+  color: #5c5e5f;
+  border-bottom: 1px solid #5c5e5f;
+}
+
+.previous.disabled a,
+.next.disabled a {
+  color: white
+}
